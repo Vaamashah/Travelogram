@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Travelogram — Your Journey, Our Promise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#142A45;
+    --navy-deep:#0B1B30;
+    --gold:#D9A75C;
+    --gold-soft:#F1DEC0;
+    --cream:#FBF8F3;
+    --line: rgba(20,42,69,0.12);
+    --ink-soft: rgba(20,42,69,0.65);
+    --radius: 14px;
+    --max: 1160px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--navy);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.01em;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  body{background-image:radial-gradient(circle at 18% 12%,rgba(217,167,92,.10),transparent 40%),radial-gradient(circle at 85% 6%,rgba(20,42,69,.06),transparent 45%),repeating-linear-gradient(135deg,rgba(20,42,69,.025) 0px,rgba(20,42,69,.025) 1px,transparent 1px,transparent 26px);}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,248,243,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .brand img{height:42px;width:auto;display:block;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+  .brand-text .name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--navy);letter-spacing:.02em;}
+  .brand-text .name span{color:var(--gold);}
+  .brand-text .tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+  nav.links{display:flex;gap:28px;align-items:center;}
+  nav.links a{font-size:.88rem;font-weight:500;text-decoration:none;color:var(--navy);position:relative;padding-bottom:4px;}
+  nav.links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .25s ease;}
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{padding:10px 22px;border-radius:999px;background:var(--navy);color:var(--cream);text-decoration:none;font-size:.88rem;font-weight:600;border:1px solid var(--navy);transition:all .25s ease;}
+  .nav-cta:hover{background:transparent;color:var(--navy);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .menu-toggle span{width:24px;height:2px;background:var(--navy);display:block;}
+
+  /* Hero */
+  .hero{padding:80px 0 60px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);font-weight:600;margin-bottom:22px;}
+  .eyebrow::before{content:'';width:34px;height:1px;background:var(--gold);}
+  .hero h1{font-size:3.5rem;line-height:1.08;color:var(--navy);margin-bottom:18px;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero p.lead{font-size:1.05rem;color:var(--ink-soft);max-width:480px;margin-bottom:28px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s ease;border:1px solid transparent;cursor:pointer;font-family:'Inter',sans-serif;}
+  .btn-primary{background:var(--navy);color:var(--cream);border-color:var(--navy);}
+  .btn-primary:hover{background:var(--navy-deep);transform:translateY(-2px);}
+  .btn-outline{background:transparent;color:var(--navy);border-color:var(--navy);}
+  .btn-outline:hover{background:var(--navy);color:var(--cream);}
+  .btn-gold{background:var(--gold);color:var(--navy-deep);border-color:var(--gold);}
+  .btn-gold:hover{background:var(--navy);color:var(--cream);border-color:var(--navy);}
+  .btn-sm{padding:9px 18px;font-size:.82rem;}
+  .hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
+  .hero-stats div{display:flex;flex-direction:column;}
+  .hero-stats .num{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:600;color:var(--navy);}
+  .hero-stats .lbl{font-size:.78rem;color:var(--ink-soft);letter-spacing:.05em;}
+
+  /* Trip Type Strip */
+  .trip-types{padding:0 0 60px;}
+  .trip-types-label{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:20px;}
+  .trip-type-grid{display:flex;gap:14px;flex-wrap:wrap;}
+  .trip-type-chip{
+    display:flex;align-items:center;gap:10px;
+    padding:14px 22px;border-radius:16px;border:1.5px solid var(--line);
+    background:#fff;cursor:pointer;transition:all .22s ease;
+    font-size:.88rem;font-weight:600;color:var(--navy);text-decoration:none;
+  }
+  .trip-type-chip:hover,.trip-type-chip.active{background:var(--navy);color:var(--cream);border-color:var(--navy);transform:translateY(-2px);box-shadow:0 12px 28px -16px rgba(20,42,69,.4);}
+  .trip-type-chip .icon{font-size:1.4rem;line-height:1;}
+  .trip-type-chip .chip-lbl{display:flex;flex-direction:column;}
+  .trip-type-chip .chip-lbl span{font-size:.7rem;font-weight:400;opacity:.7;margin-top:1px;}
+
+  /* Hero Visual */
+  .hero-visual{position:relative;background:var(--navy);border-radius:24px;padding:34px;color:var(--cream);min-height:420px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;box-shadow:0 30px 60px -25px rgba(20,42,69,.55);}
+  .hero-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(217,167,92,.25),transparent 45%),repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px);}
+  .visual-top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;}
+  .visual-top .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 14px;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);}
+  .route-line{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:26px 0;}
+  .route-step{display:flex;align-items:center;gap:14px;}
+  .route-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+  .route-step.muted .route-dot{background:rgba(255,255,255,.3);}
+  .route-step .rt{flex:1;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed rgba(255,255,255,.18);padding-bottom:10px;}
+  .route-step .rt b{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;}
+  .route-step .rt span{font-size:.75rem;color:rgba(255,255,255,.55);}
+  .visual-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);}
+  .visual-bottom .price b{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);}
+  .visual-bottom .price div{font-size:.75rem;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;}
+
+  /* Sections */
+  section{padding:80px 0;}
+  .section-head{max-width:640px;margin-bottom:50px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:2.5rem;color:var(--navy);margin-bottom:14px;}
+  .section-head p{color:var(--ink-soft);font-size:1rem;}
+  .alt-bg{background:linear-gradient(180deg,rgba(20,42,69,.03),rgba(20,42,69,0));}
+
+  /* Trip type filter result */
+  #tripTypeResult{display:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px 40px;margin-bottom:0;}
+  #tripTypeResult h3{font-size:1.9rem;margin-bottom:8px;color:var(--navy);}
+  #tripTypeResult .sub{color:var(--ink-soft);margin-bottom:24px;font-size:.95rem;}
+  .trip-suggestions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+  .trip-sugg-card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .trip-sugg-card .ts-icon{font-size:1.6rem;margin-bottom:8px;}
+  .trip-sugg-card h4{font-size:1.05rem;color:var(--navy);margin-bottom:4px;}
+  .trip-sugg-card p{font-size:.82rem;color:var(--ink-soft);}
+
+  /* How it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .step-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:transform .3s ease,box-shadow .3s ease;}
+  .step-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -28px rgba(20,42,69,.35);}
+  .step-mark{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:18px;display:block;}
+  .step-card h3{font-size:1.4rem;margin-bottom:10px;color:var(--navy);}
+  .step-card p{font-size:.9rem;color:var(--ink-soft);}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:30px;}
+  .price-card{border-radius:20px;padding:38px;border:1px solid var(--line);background:#fff;display:flex;flex-direction:column;gap:18px;}
+  .price-card.featured{background:var(--navy);color:var(--cream);border-color:var(--navy);position:relative;overflow:hidden;}
+  .price-card.featured::after{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(217,167,92,.18);}
+  .price-card .ptag{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold);}
+  .price-card.featured .ptag{color:var(--gold-soft);}
+  .price-card h3{font-size:1.9rem;margin:6px 0;}
+  .price-value{font-family:'Cormorant Garamond',serif;font-size:2.9rem;font-weight:600;display:flex;align-items:baseline;gap:8px;}
+  .price-value span{font-size:1rem;font-weight:500;color:var(--ink-soft);}
+  .price-card.featured .price-value span{color:rgba(255,255,255,.6);}
+  .price-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:.9rem;}
+  .price-card ul li{display:flex;gap:10px;align-items:flex-start;}
+  .price-card ul li::before{content:'—';color:var(--gold);flex-shrink:0;}
+  .price-card .btn{margin-top:10px;align-self:flex-start;}
+
+  /* Coins */
+  .coins-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center;}
+  .coin-board{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .coin-cell{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px;}
+  .coin-cell .amt{font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:var(--gold);font-weight:600;}
+  .coin-cell .who{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+  .coin-cell p{font-size:.84rem;color:var(--ink-soft);}
+  .coin-cell.wide{grid-column:1/-1;background:var(--navy);color:var(--cream);border-color:var(--navy);}
+  .coin-cell.wide .who{color:var(--gold-soft);}
+  .coin-cell.wide p{color:rgba(255,255,255,.7);}
+  .coins-text ul{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:24px;}
+  .coins-text ul li{display:flex;gap:14px;align-items:flex-start;font-size:.93rem;color:var(--navy);border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .coins-text ul li b{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;min-width:34px;}
+
+  /* Plan form */
+  .form-section{background:var(--navy);color:var(--cream);border-radius:28px;padding:60px;display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;}
+  .form-section .section-head h2{color:var(--cream);}
+  .form-section .section-head p{color:rgba(255,255,255,.65);}
+  .form-section .eyebrow{color:var(--gold-soft);}
+  .form-section .eyebrow::before{background:var(--gold);}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .form-grid .full{grid-column:1/-1;}
+  label{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;font-weight:600;}
+  input,select,textarea{width:100%;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--cream);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s ease;}
+  input::placeholder,textarea::placeholder{color:rgba(255,255,255,.35);}
+  input:focus,select:focus,textarea:focus{border-color:var(--gold);}
+  select option{color:#000;}
+  textarea{resize:vertical;min-height:88px;}
+  .form-note{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:6px;}
+  .form-submit-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:8px;}
+  .form-msg{font-size:.85rem;color:var(--gold-soft);display:none;margin-top:8px;}
+
+  /* Auth */
+  .auth-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+  .auth-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:38px;}
+  .auth-card h3{font-size:1.65rem;margin-bottom:6px;color:var(--navy);}
+  .auth-card p.sub{font-size:.88rem;color:var(--ink-soft);margin-bottom:24px;}
+  .auth-card label{color:var(--ink-soft);}
+  .auth-card input,.auth-card select,.auth-card textarea{background:var(--cream);border:1px solid var(--line);color:var(--navy);}
+  .auth-card input::placeholder,.auth-card textarea::placeholder{color:rgba(20,42,69,.35);}
+  .auth-card input:focus,.auth-card textarea:focus{border-color:var(--gold);}
+  .auth-grid{display:grid;gap:16px;margin-bottom:20px;}
+  .role-toggle{display:flex;gap:10px;margin-bottom:22px;}
+  .role-toggle button{flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--cream);font-size:.85rem;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all .2s ease;font-family:'Inter',sans-serif;}
+  .role-toggle button.active{background:var(--navy);color:var(--cream);border-color:var(--navy);}
+
+  /* Destination */
+  .search-wrap{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;margin-bottom:46px;}
+  .search-field{flex:1;min-width:180px;}
+  .search-field label{color:var(--ink-soft);}
+  .search-field input,.search-field select{background:var(--cream);border:1px solid var(--line);color:var(--navy);}
+  .search-field input:focus,.search-field select:focus{border-color:var(--gold);}
+  .destination-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .dest-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;}
+  .dest-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -28px rgba(20,42,69,.35);}
+  .dest-card .img{height:130px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--cream);background:linear-gradient(135deg,var(--navy),var(--navy-deep));position:relative;overflow:hidden;}
+  .dest-card .img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 18px);}
+  .dest-card .img span{position:relative;z-index:1;}
+  .dest-card .body{padding:16px 18px;}
+  .dest-card .body h4{font-size:1.15rem;color:var(--navy);margin-bottom:4px;}
+  .dest-card .body .tagline{font-size:.75rem;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+  .dest-card .body p{font-size:.84rem;color:var(--ink-soft);margin-bottom:12px;}
+  .dest-card .body a{font-size:.83rem;font-weight:600;color:var(--navy);text-decoration:none;}
+  .dest-card .body a:hover{color:var(--gold);}
+  .dest-card .body .explore-link{display:inline-block;}
+  .no-results{display:none;text-align:center;color:var(--ink-soft);padding:28px 0;font-size:.93rem;}
+
+  /* Dashboard */
+  .request-card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:14px;flex-wrap:wrap;}
+  .request-card .meta b{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy);}
+  .request-card .meta .tagline{margin-top:4px;font-size:.82rem;color:var(--ink-soft);}
+  .request-card .meta p{font-size:.84rem;color:var(--ink-soft);margin-top:6px;}
+  .request-actions{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
+  .request-actions .btn{padding:9px 18px;font-size:.8rem;}
+  .status-pill{display:inline-block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 12px;border-radius:999px;margin-top:6px;}
+  .status-pill.pending{background:var(--gold-soft);color:var(--navy);}
+  .status-pill.accepted{background:#dff5e3;color:#1f7a3a;}
+  .status-pill.declined{background:#fae0e0;color:#a13a3a;}
+  .empty-note{font-size:.88rem;color:var(--ink-soft);}
+  .coin-tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(217,167,92,.12);border-radius:999px;padding:4px 10px;margin-top:8px;}
+
+  /* Captain profile page */
+  #captainProfilePage{display:none;position:fixed;inset:0;background:var(--cream);z-index:200;overflow-y:auto;}
+  .cap-profile-inner{max-width:860px;margin:0 auto;padding:40px 28px 80px;}
+  .cap-profile-back{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;color:var(--navy);cursor:pointer;margin-bottom:32px;background:none;border:none;font-family:'Inter',sans-serif;}
+  .cap-profile-back:hover{color:var(--gold);}
+  .cap-profile-header{background:var(--navy);color:var(--cream);border-radius:22px;padding:40px;margin-bottom:28px;position:relative;overflow:hidden;}
+  .cap-profile-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(217,167,92,.25),transparent 50%);}
+  .cap-profile-header .pz{position:relative;z-index:1;}
+  .cap-profile-header h2{font-size:2.4rem;margin-bottom:6px;}
+  .cap-profile-header .badge{display:inline-block;background:rgba(217,167,92,.2);border:1px solid rgba(217,167,92,.4);color:var(--gold-soft);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;padding:5px 14px;border-radius:999px;margin-bottom:14px;}
+  .cap-profile-header p{color:rgba(255,255,255,.75);max-width:560px;font-size:.95rem;}
+  .cap-profile-stats{display:flex;gap:28px;margin-top:22px;flex-wrap:wrap;}
+  .cap-profile-stats div{display:flex;flex-direction:column;}
+  .cap-profile-stats .sv{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--gold);}
+  .cap-profile-stats .sl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+  .cap-update-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:28px;}
+  .cap-update-box h4{font-size:1.1rem;margin-bottom:12px;color:var(--navy);}
+  .cap-update-box p{color:var(--ink-soft);font-size:.92rem;}
+  .cap-hire-box{background:var(--navy);color:var(--cream);border-radius:20px;padding:36px;}
+  .cap-hire-box h3{font-size:1.7rem;margin-bottom:8px;}
+  .cap-hire-box p.sub{color:rgba(255,255,255,.65);margin-bottom:24px;font-size:.9rem;}
+  .cap-hire-box label{color:rgba(255,255,255,.6);}
+  .cap-hire-box .hire-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .cap-hire-box .hire-grid .full{grid-column:1/-1;}
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.65);padding:60px 0 26px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .footer-brand .name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:600;}
+  .footer-brand .name span{color:var(--gold);}
+  footer h4{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600;}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:.86rem;}
+  footer ul a{text-decoration:none;color:rgba(255,255,255,.65);transition:color .2s ease;}
+  footer ul a:hover{color:var(--gold);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.78rem;color:rgba(255,255,255,.4);}
+
+  /* WhatsApp float */
+  .wa-float{position:fixed;bottom:26px;right:26px;z-index:60;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:600;font-size:.88rem;box-shadow:0 14px 30px -10px rgba(0,0,0,.35);transition:transform .25s ease,box-shadow .25s ease;}
+  .wa-float:hover{transform:translateY(-3px);box-shadow:0 18px 36px -10px rgba(0,0,0,.4);}
+  .wa-float svg{width:22px;height:22px;flex-shrink:0;}
+
+  /* ===== Destination Explorer (Pinterest-style modal) ===== */
+  #destExplorer{display:none;position:fixed;inset:0;background:rgba(11,27,48,.55);z-index:250;overflow-y:auto;padding:40px 20px;}
+  .explorer-card{max-width:980px;margin:0 auto;background:var(--cream);border-radius:22px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(0,0,0,.4);}
+  .explorer-head{background:var(--navy);color:var(--cream);padding:30px 36px;position:relative;overflow:hidden;}
+  .explorer-head::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 10%,rgba(217,167,92,.25),transparent 50%);}
+  .explorer-head .ez{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+  .explorer-head h2{font-size:2.1rem;margin-bottom:4px;}
+  .explorer-head p{color:rgba(255,255,255,.7);font-size:.9rem;max-width:480px;}
+  .explorer-close{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:var(--cream);width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;flex-shrink:0;}
+  .explorer-close:hover{background:rgba(255,255,255,.2);}
+  .explorer-body{padding:30px 36px 36px;}
+  .explorer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;}
+  .place-pin-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;}
+  .place-pin-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px -22px rgba(20,42,69,.4);}
+  .place-pin-card .pimg{height:120px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,var(--navy),var(--navy-deep));position:relative;}
+  .place-pin-card .pimg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 18px);}
+  .place-pin-card .pbody{padding:14px 16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .place-pin-card .pbody h4{font-size:1.02rem;color:var(--navy);}
+  .place-pin-card .pbody p{font-size:.8rem;color:var(--ink-soft);flex:1;}
+  .pin-btn{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--cream);border-radius:999px;padding:8px 14px;font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s ease;font-family:'Inter',sans-serif;margin-top:4px;}
+  .pin-btn .pin-icon{font-size:1rem;}
+  .pin-btn.pinned{background:var(--gold);color:var(--navy-deep);border-color:var(--gold);}
+  .explorer-itinerary-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;}
+  .explorer-itinerary-box h4{font-size:1.05rem;color:var(--navy);margin-bottom:6px;}
+  .explorer-itinerary-box .sub{font-size:.83rem;color:var(--ink-soft);margin-bottom:14px;}
+  .pinned-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;min-height:30px;}
+  .pinned-tag{display:flex;align-items:center;gap:6px;background:var(--gold-soft);color:var(--navy);font-size:.78rem;font-weight:600;border-radius:999px;padding:6px 12px;}
+  .pinned-tag button{background:none;border:none;color:var(--navy);cursor:pointer;font-size:.85rem;line-height:1;}
+  .pinned-empty{font-size:.83rem;color:var(--ink-soft);}
+  .explorer-itinerary-box textarea{background:var(--cream);border:1px solid var(--line);color:var(--navy);}
+  .explorer-itinerary-box label{color:var(--ink-soft);}
+  .explorer-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;align-items:center;}
+  .explorer-note{font-size:.78rem;color:var(--ink-soft);}
+
+  /* Pinned summary on plan form */
+  .pinned-summary-box{grid-column:1/-1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 16px;}
+  .pinned-summary-box .lbl{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:8px;}
+  .pinned-summary-box .pinned-tags{margin-bottom:0;}
+  .pinned-summary-box .pinned-tag{background:rgba(217,167,92,.18);color:var(--gold-soft);}
+  .pinned-summary-box .pinned-tag button{color:var(--gold-soft);}
+  .pinned-summary-empty{font-size:.85rem;color:rgba(255,255,255,.45);}
+
+  /* Responsive */
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;gap:40px;padding-top:50px;}
+    .hero h1{font-size:2.6rem;}
+    .pricing-grid,.coins-wrap,.form-section,.auth-wrap{grid-template-columns:1fr;}
+    .form-section{padding:36px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr;}
+    .trip-suggestions{grid-template-columns:1fr 1fr;}
+    .destination-grid{grid-template-columns:repeat(2,1fr);}
+    .cap-hire-box .hire-grid{grid-template-columns:1fr;}
+    .explorer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:760px){
+    nav.links{position:absolute;top:100%;left:0;right:0;background:var(--cream);flex-direction:column;padding:20px 28px;border-bottom:1px solid var(--line);display:none;gap:16px;}
+    nav.links.open{display:flex;}
+    .menu-toggle{display:flex;}
+    .nav-cta{display:none;}
+    .form-grid,.auth-grid{grid-template-columns:1fr;}
+    .coin-board{grid-template-columns:1fr;}
+    .hero h1{font-size:2.1rem;}
+    .trip-type-grid{gap:10px;}
+    .trip-type-chip{padding:11px 16px;}
+    .trip-suggestions{grid-template-columns:1fr;}
+    .destination-grid{grid-template-columns:1fr;}
+    .wa-float span{display:none;}
+    .wa-float{padding:14px;}
+    .explorer-grid{grid-template-columns:1fr;}
+    .explorer-head{padding:24px;}
+    .explorer-body{padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- CAPTAIN PROFILE PAGE (overlay) -->
+<div id="captainProfilePage">
+  <div class="cap-profile-inner">
+    <button class="cap-profile-back" id="backFromCaptainProfile">← Back</button>
+    <div class="cap-profile-header">
+      <div class="pz">
+        <div class="badge">Verified Tour Captain</div>
+        <h2 id="cpName">Captain Name</h2>
+        <p id="cpBio">Bio goes here.</p>
+        <div class="cap-profile-stats">
+          <div><span class="sv" id="cpCoins">0</span><span class="sl">Coins Earned</span></div>
+          <div><span class="sv" id="cpCustomers">0</span><span class="sl">Happy Travellers</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cap-update-box" id="cpUpdateBox" style="display:none;">
+      <h4>📍 Latest Trip Update</h4>
+      <p id="cpUpdate"></p>
+    </div>
+    <div class="cap-hire-box" id="cpHireBox">
+      <h3>Hire <span id="cpHireName">this Captain</span></h3>
+      <p class="sub">Fill in your trip details below. Your captain will accept your request and your deal continues from there.</p>
+      <div id="cpNotLoggedIn" style="display:none;">
+        <p style="color:rgba(255,255,255,.7);margin-bottom:16px;">You need to be logged in as a traveller to send a hire request.</p>
+        <a href="#auth" class="btn btn-gold" id="cpLoginLink">Sign Up / Log In →</a>
+      </div>
+      <div id="cpHireForm">
+        <div class="hire-grid">
+          <div>
+            <label for="cpHireDest">Destination</label>
+            <input type="text" id="cpHireDest" placeholder="Where are you going?">
+          </div>
+          <div>
+            <label for="cpHireDates">Travel Dates</label>
+            <input type="text" id="cpHireDates" placeholder="e.g. 12–17 July">
+          </div>
+          <div>
+            <label for="cpHirePeople">No. of Travellers</label>
+            <input type="number" id="cpHirePeople" min="1" placeholder="e.g. 2">
+          </div>
+          <div>
+            <label for="cpHireBudget">Budget per person</label>
+            <input type="text" id="cpHireBudget" placeholder="e.g. ₹15,000">
+          </div>
+          <div class="full">
+            <label for="cpHireNotes">Notes for the Captain</label>
+            <textarea id="cpHireNotes" placeholder="Group size, trip type, bookings needed, special requirements..."></textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-gold" id="cpHireSubmitBtn">Send Hire Request</button>
+        </div>
+        <p class="form-msg" id="cpHireMsg" style="color:var(--gold-soft);">✓ Hire request sent! The captain will accept and your booking continues from here.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESTINATION EXPLORER (Pinterest-style overlay) -->
+<div id="destExplorer">
+  <div class="explorer-card">
+    <div class="explorer-head">
+      <div class="ez">
+        <div>
+          <h2 id="exTitle">Destination</h2>
+          <p id="exSubtitle">Explore must-visit places, save your favourites, and add notes for your itinerary.</p>
+        </div>
+        <button class="explorer-close" id="exClose" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div class="explorer-body">
+      <div class="explorer-grid" id="exGrid"></div>
+      <div class="explorer-itinerary-box">
+        <h4>📌 Your pinned places for this trip</h4>
+        <p class="sub">Pin the spots you love — they'll be added to your itinerary request automatically.</p>
+        <div class="pinned-tags" id="exPinnedTags"></div>
+        <label for="exItineraryNote">Itinerary Guide Notes (optional)</label>
+        <textarea id="exItineraryNote" placeholder="e.g. Must include the lake viewpoint on Day 2, prefer riverside cafés, avoid late-night travel..."></textarea>
+        <div class="explorer-actions">
+          <button type="button" class="btn btn-gold" id="exGoToPlan">Use These Picks — Go to Itinerary Form →</button>
+          <span class="explorer-note">Your pins &amp; notes will be sent to us when you submit &amp; pay ₹100.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav wrap">
+    <a href="#" class="brand">
+      <img src="travelogram_logo_nav.png" alt="Travelogram - Your Journey, Our Promise">
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#itineraries">Itineraries</a>
+      <a href="#captains">Tour Captains</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#plan">Plan a Trip</a>
+      <a href="#dashboard">My Account</a>
+    </nav>
+    <a href="#auth" class="nav-cta">Sign Up Free</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div>
+    <span class="eyebrow">Plan less. Travel more.</span>
+    <h1>Every itinerary, every guide, <em>tailored for you.</em></h1>
+    <p class="lead">Stop juggling ten tabs to plan a trip. Travelogram builds your itinerary, connects you with a verified tour captain, and rewards you in coins for every step — all in one place.</p>
+    <div class="hero-actions">
+      <a href="#plan" class="btn btn-primary">Get My Itinerary — ₹100</a>
+      <a href="#captains" class="btn btn-outline">Hire a Tour Captain</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="num">₹100</span><span class="lbl">Per custom itinerary</span></div>
+      <div><span class="num">50</span><span class="lbl">Coins on selection</span></div>
+      <div><span class="num">1 Mo</span><span class="lbl">Free trial for all</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual-top">
+      <span class="pill">Sample Itinerary</span>
+      <span class="pill">5 Days · Manali</span>
+    </div>
+    <div class="route-line">
+      <div class="route-step"><span class="route-dot"></span><div class="rt"><b>Day 1 — Arrival &amp; Old Manali</b><span>Captain assigned</span></div></div>
+      <div class="route-step"><span class="route-dot"></span><div class="rt"><b>Day 2 — Solang Valley</b><span>Adventure add-on</span></div></div>
+      <div class="route-step muted"><span class="route-dot"></span><div class="rt"><b>Day 3 — Sissu &amp; Atal Tunnel</b><span>Stay booked</span></div></div>
+      <div class="route-step muted"><span class="route-dot"></span><div class="rt"><b>Day 4–5 — Kasol &amp; Departure</b><span>Sent on WhatsApp</span></div></div>
+    </div>
+    <div class="visual-bottom">
+      <div class="price"><b>₹100</b><div>One-time itinerary fee</div></div>
+      <div class="price" style="text-align:right;"><b>+50</b><div>Coins on confirmation</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIP TYPE QUICK PICKS -->
+<div class="wrap trip-types">
+  <p class="trip-types-label">What kind of trip are you planning?</p>
+  <div class="trip-type-grid" id="tripTypeGrid">
+    <button class="trip-type-chip" data-type="solo"><span class="icon">🎒</span><span class="chip-lbl">Solo Trip<span>Go at your own pace</span></span></button>
+    <button class="trip-type-chip" data-type="trekker"><span class="icon">⛰️</span><span class="chip-lbl">Trekker<span>Trails &amp; high altitude</span></span></button>
+    <button class="trip-type-chip" data-type="bachelor"><span class="icon">🎉</span><span class="chip-lbl">Bachelor Trip<span>Last ride, first class</span></span></button>
+    <button class="trip-type-chip" data-type="student"><span class="icon">🎓</span><span class="chip-lbl">Student Trip<span>Budget-smart &amp; fun</span></span></button>
+    <button class="trip-type-chip" data-type="family"><span class="icon">👨‍👩‍👧‍👦</span><span class="chip-lbl">Family Trip<span>Comfortable &amp; safe</span></span></button>
+    <button class="trip-type-chip" data-type="honeymoon"><span class="icon">💑</span><span class="chip-lbl">Honeymoon<span>Romantic &amp; private</span></span></button>
+    <button class="trip-type-chip" data-type="weekend"><span class="icon">⚡</span><span class="chip-lbl">Weekend Escape<span>2–3 day getaway</span></span></button>
+    <button class="trip-type-chip" data-type="luxury"><span class="icon">✨</span><span class="chip-lbl">Luxury Tour<span>Premium all the way</span></span></button>
+  </div>
+
+  <!-- Trip type result panel -->
+  <div id="tripTypeResult" style="display:none;margin-top:30px;">
+    <div id="ttrContent"></div>
+  </div>
+</div>
+
+<!-- DESTINATION SEARCH -->
+<section id="destinations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Where To Next?</span>
+      <h2>Search destinations across India &amp; beyond.</h2>
+      <p>Browse popular places, filter by type of trip or budget, and jump straight into building your itinerary. Click any destination to explore places to visit, see what other travellers loved, and pin your favourites.</p>
+    </div>
+    <div class="search-wrap">
+      <div class="search-field">
+        <label for="destSearch">Search destination</label>
+        <input type="text" id="destSearch" placeholder="Try 'Goa', 'mountains', 'beach'...">
+      </div>
+      <div class="search-field" style="max-width:200px;">
+        <label for="destType">Trip type</label>
+        <select id="destType">
+          <option value="all">All types</option>
+          <option value="mountain">Mountains</option>
+          <option value="beach">Beach</option>
+          <option value="heritage">Heritage</option>
+          <option value="adventure">Adventure</option>
+          <option value="city">City Break</option>
+        </select>
+      </div>
+      <div class="search-field" style="max-width:200px;">
+        <label for="destBudget">Budget</label>
+        <select id="destBudget">
+          <option value="all">Any budget</option>
+          <option value="low">Under ₹10,000</option>
+          <option value="mid">₹10,000 – ₹25,000</option>
+          <option value="high">₹25,000+</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary" id="destClear">Clear Filters</button>
+    </div>
+    <div class="destination-grid" id="destinationGrid">
+      <div class="dest-card" data-name="manali himachal pradesh" data-type="mountain" data-budget="mid" data-key="manali"><div class="img"><span>Manali, HP</span></div><div class="body"><div class="tagline">Mountains · Mid Budget</div><h4>Manali</h4><p>Snow-capped valleys, riverside cafés and easy treks.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="goa beach" data-type="beach" data-budget="mid" data-key="goa"><div class="img"><span>Goa</span></div><div class="body"><div class="tagline">Beach · Mid Budget</div><h4>Goa</h4><p>Sun, shacks and sunset cruises along the coast.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="jaipur rajasthan heritage" data-type="heritage" data-budget="low" data-key="jaipur"><div class="img"><span>Jaipur, RJ</span></div><div class="body"><div class="tagline">Heritage · Budget Friendly</div><h4>Jaipur</h4><p>Forts, palaces and bazaars of the Pink City.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="rishikesh adventure river" data-type="adventure" data-budget="low" data-key="rishikesh"><div class="img"><span>Rishikesh, UK</span></div><div class="body"><div class="tagline">Adventure · Budget Friendly</div><h4>Rishikesh</h4><p>River rafting, cliff jumps and yoga retreats by the Ganges.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="mumbai city break" data-type="city" data-budget="high" data-key="mumbai"><div class="img"><span>Mumbai, MH</span></div><div class="body"><div class="tagline">City Break · Premium</div><h4>Mumbai</h4><p>Food trails, skyline views and nightlife.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="kerala backwaters beach" data-type="beach" data-budget="high" data-key="kerala"><div class="img"><span>Kerala</span></div><div class="body"><div class="tagline">Beach &amp; Backwaters · Premium</div><h4>Kerala</h4><p>Houseboats, backwaters and lush hill stations.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="leh ladakh mountain adventure" data-type="mountain" data-budget="high" data-key="ladakh"><div class="img"><span>Leh-Ladakh</span></div><div class="body"><div class="tagline">Mountains · Adventure · Premium</div><h4>Leh-Ladakh</h4><p>High-altitude lakes, monasteries and epic road trips.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+      <div class="dest-card" data-name="udaipur rajasthan heritage city" data-type="heritage" data-budget="mid" data-key="udaipur"><div class="img"><span>Udaipur, RJ</span></div><div class="body"><div class="tagline">Heritage · City Break</div><h4>Udaipur</h4><p>Lakeside palaces and royal charm — the City of Lakes.</p><a href="#plan" class="explore-link">Explore places &amp; plan this trip →</a></div></div>
+    </div>
+    <p class="no-results" id="noResults">No destinations match — try different filters or describe your dream trip in the form below.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Travelogram Way</span>
+      <h2>Three steps from "where should I go" to "I'm packed."</h2>
+      <p>No more endless research or chasing agents. Tell us what you want — we handle the rest.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card"><span class="step-mark">Step One</span><h3>Tell us your trip</h3><p>Share your destination, dates, budget and travel style through our simple form.</p></div>
+      <div class="step-card"><span class="step-mark">Step Two</span><h3>Get your itinerary</h3><p>For just ₹100, receive a day-by-day itinerary delivered to your WhatsApp and email.</p></div>
+      <div class="step-card"><span class="step-mark">Step Three</span><h3>Hire a Tour Captain</h3><p>Need bookings handled? Hire a verified Tour Captain to manage stays, transport and tickets.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="itineraries">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Simple, Honest Pricing</span>
+      <h2>One itinerary. One captain. One clear price.</h2>
+      <p>Your first month is completely free — basic itinerary, every captain booking. Small fees for premium itinerary , and you keep earning coins.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <span class="ptag">For Travellers</span>
+        <h3>Custom Itinerary</h3>
+        <div class="price-value">₹100 <span>/ itinerary</span></div>
+        <ul>
+          <li>Personalised day-by-day plan based on your form</li>
+          <li>Delivered on WhatsApp &amp; email instantly</li>
+          <li>Earn 50 coins when you confirm your itinerary</li>
+          <li>Bonus coins if you hire a Tour Captain</li>
+          <li>First month free — pay nothing on your first trip ,only premium itinerary charged 100rs, small fees for basic itinerary</li>
+        </ul>
+        <a href="#plan" class="btn btn-gold">Plan My Trip</a>
+      </div>
+      <div class="price-card">
+        <span class="ptag" id="captains">For Tour Captains</span>
+        <h3>Become a Captain</h3>
+        <div class="price-value">Free <span>to join</span></div>
+        <ul>
+          <li>Get matched with travellers who already have an itinerary</li>
+          <li>Earn 50 coins every time your itinerary is selected</li>
+          <li>Extra coins when a traveller books you through Travelogram</li>
+          <li>Refer other captains or travellers for bonus coins</li>
+          <li>First month free, only premium itineraries has been charged with a small amount, then a small platform fee per trip</li>
+        </ul>
+        <a href="#auth" class="btn btn-primary">Join as a Captain</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REWARDS -->
+<section id="rewards" class="alt-bg">
+  <div class="wrap coins-wrap">
+    <div class="coins-text">
+      <span class="eyebrow">Travelogram Coins</span>
+      <h2 style="font-size:2.3rem;margin-bottom:12px;">Every action earns you something back.</h2>
+      <p style="color:var(--ink-soft);">Coins can be redeemed for discounts on future itineraries, captain bookings, and exclusive trip gifts.</p>
+      <ul>
+        <li><b>50</b> Itinerary selected — both traveller and tour captain receive 50 coins each.</li>
+        <li><b>+</b> Captain booked — extra coins for the traveller who hires through Travelogram.</li>
+        <li><b>+</b> Referral bonus — coins for the captain when a customer comes via your referral.</li>
+        <li><b>1mo</b> Free trial — everyone gets one month free; only premium itinerary charged 100rs, from the next trip, small fees apply.</li>
+      </ul>
+    </div>
+    <div class="coin-board">
+      <div class="coin-cell"><span class="who">Traveller</span><span class="amt">+50</span><p>When your itinerary is confirmed and selected.</p></div>
+      <div class="coin-cell"><span class="who">Tour Captain</span><span class="amt">+50</span><p>When your itinerary gets picked by a traveller.</p></div>
+      <div class="coin-cell"><span class="who">Traveller</span><span class="amt">+ Bonus</span><p>For hiring a Tour Captain through Travelogram.</p></div>
+      <div class="coin-cell"><span class="who">Captain</span><span class="amt">+ Bonus</span><p>For every customer who joins by your reference.</p></div>
+      <div class="coin-cell wide"><span class="who">First Trip</span><span class="amt">100% Free</span><p>One month free trial for every new traveller and captain — plan your trip and start collecting coins before any fee applies.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPTAIN DIRECTORY -->
+<section id="captains-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Tour Captains</span>
+      <h2>Meet your guide on the ground.</h2>
+      <p>Every captain is a local expert. Browse their profiles, read their bios, and hire directly — your trip starts the moment they accept.</p>
+    </div>
+    <div class="destination-grid" id="publicCaptainGrid">
+      <!-- Populated by JS -->
+    </div>
+    <p style="margin-top:22px;color:var(--ink-soft);font-size:.9rem;">Want to become a captain? <a href="#auth" style="color:var(--gold);font-weight:600;">Join free →</a></p>
+  </div>
+</section>
+
+<!-- ITINERARY FORM -->
+<section id="plan">
+  <div class="wrap">
+    <div class="form-section">
+      <div>
+        <div class="section-head" style="margin-bottom:0;">
+          <span class="eyebrow">Build My Trip</span>
+          <h2>Tell us everything — we'll plan it.</h2>
+          <p>The more you share, the better your itinerary. Your plan will be sent to WhatsApp and email for ₹100.</p>
+        </div>
+      </div>
+      <form id="itineraryForm">
+        <div class="form-grid">
+          <div><label for="dest">Destination</label><input type="text" id="dest" placeholder="e.g. Manali, Goa, Kerala" required></div>
+          <div><label for="travellers">No. of Travellers</label><input type="number" id="travellers" min="1" placeholder="e.g. 2" required></div>
+          <div><label for="startDate">Start Date</label><input type="date" id="startDate" required></div>
+          <div><label for="days">Trip Duration (days)</label><input type="number" id="days" min="1" placeholder="e.g. 5" required></div>
+          <div><label for="budget">Budget (per person)</label><input type="text" id="budget" placeholder="e.g. ₹15,000"></div>
+          <div>
+            <label for="style">Travel Style</label>
+            <select id="style">
+              <option value="">Select style</option>
+              <option>Solo Trip</option>
+              <option>Trekker / Adventure</option>
+              <option>Bachelor Trip</option>
+              <option>Student Trip / Budget</option>
+              <option>Relaxed / Leisure</option>
+              <option>Family Friendly</option>
+              <option>Honeymoon</option>
+              <option>Weekend Escape</option>
+              <option>Luxury</option>
+            </select>
+          </div>
+          <div><label for="whatsapp">WhatsApp Number</label><input type="tel" id="whatsapp" placeholder="+91 98765 43210" required></div>
+          <div><label for="planEmail">Email Address</label><input type="email" id="planEmail" placeholder="you@example.com" required></div>
+          <div class="full"><label for="extraInfo">Additional Information</label><textarea id="extraInfo" placeholder="Food preferences, accessibility needs, places you don't want to miss, hotel preferences..."></textarea></div>
+
+          <!-- Pinned places summary (filled from Destination Explorer) -->
+          <div class="full pinned-summary-box" id="pinnedSummaryBox">
+            <div class="lbl">📌 Places you've pinned to visit (optional)</div>
+            <div class="pinned-tags" id="planPinnedTags"></div>
+            <p class="pinned-summary-empty" id="planPinnedEmpty">Nothing pinned yet — explore a destination above and tap the 📌 icon on places you'd like in your itinerary.</p>
+          </div>
+          <div class="full" id="planItineraryNoteWrap" style="display:none;">
+            <label for="planItineraryNoteDisplay">Itinerary Guide Notes (from explorer)</label>
+            <textarea id="planItineraryNoteDisplay" placeholder="Notes you added while exploring will appear here — feel free to edit."></textarea>
+          </div>
+
+          <div class="full">
+            <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:.88rem;color:rgba(255,255,255,.85);margin-bottom:0;">
+              <input type="checkbox" id="needCaptain" style="width:18px;height:18px;accent-color:var(--gold);">
+              Also match me with a Tour Captain for bookings
+            </label>
+          </div>
+        </div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-gold">Submit &amp; Pay ₹100</button>
+          <span class="form-note">Sent to the WhatsApp &amp; email above.</span>
+        </div>
+        <p class="form-msg" id="planMsg">✓ Got it! Your request is recorded — opening WhatsApp now.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- AUTH -->
+<section id="auth" class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Join Travelogram</span>
+      <h2>Create your account</h2>
+      <p>Sign up as a Traveller to plan trips, or as a Tour Captain to get hired. You can switch roles any time from your dashboard.</p>
+    </div>
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <h3>Sign Up</h3>
+        <p class="sub">Choose how you'll use Travelogram. You can switch or add roles later from My Account.</p>
+        <div class="role-toggle" id="signupRoleToggle">
+          <button type="button" class="active" data-role="traveller">🧭 Traveller</button>
+          <button type="button" data-role="captain">⚓ Tour Captain</button>
+        </div>
+        <form id="signupForm">
+          <div class="auth-grid">
+            <div><label for="suUsername">Username</label><input type="text" id="suUsername" placeholder="Choose a username" required></div>
+            <div><label for="suEmail">Email Address</label><input type="email" id="suEmail" placeholder="you@example.com" required></div>
+            <div><label for="suWhatsapp">WhatsApp Number</label><input type="tel" id="suWhatsapp" placeholder="+91 98765 43210" required></div>
+            <div><label for="suPassword">Password</label><input type="password" id="suPassword" placeholder="Create a password" required></div>
+            <div><label for="suReferral">Referral Code (optional)</label><input type="text" id="suReferral" placeholder="Captain or friend's code"></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Create Account — Start Free Trial</button>
+          <p class="form-msg" id="signupMsg" style="color:var(--navy);">✓ Account created! Your one-month free trial has started.</p>
+        </form>
+      </div>
+      <div class="auth-card">
+        <h3>Log In</h3>
+        <p class="sub">Already with Travelogram? Welcome back — pick up your itinerary or check your coin balance.</p>
+        <form id="loginForm">
+          <div class="auth-grid">
+            <div><label for="liEmail">Email or Username</label><input type="text" id="liEmail" placeholder="Email or username" required></div>
+            <div><label for="liPassword">Password</label><input type="password" id="liPassword" placeholder="Your password" required></div>
+          </div>
+          <button type="submit" class="btn btn-outline" style="width:100%;justify-content:center;">Log In</button>
+          <p class="form-msg" id="loginMsg" style="color:var(--navy);">✓ Logged in successfully.</p>
+        </form>
+        <div style="margin-top:28px;padding-top:22px;border-top:1px solid var(--line);">
+          <h3 style="font-size:1.15rem;margin-bottom:8px;">Your Coin Wallet &amp; Profile</h3>
+          <p class="sub" style="margin-bottom:0;">Once logged in, head to <a href="#dashboard" style="color:var(--gold);font-weight:600;">My Account</a> to see your coins, your current Tour Captain, and trip updates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">My Account</span>
+      <h2>Your profile, coins &amp; trip updates</h2>
+      <p>Travellers can hire a captain, see trip updates and switch captains. Tour Captains manage hire requests, update profiles, and view their customers.</p>
+    </div>
+
+    <div id="dashLoggedOut" class="auth-card" style="max-width:520px;">
+      <h3>You're not logged in</h3>
+      <p class="sub">Please <a href="#auth" style="color:var(--gold);font-weight:600;">sign up or log in</a> above to view your account, coins, and trip updates.</p>
+    </div>
+
+    <div id="dashLoggedIn" style="display:none;">
+
+      <!-- Profile bar -->
+      <div class="auth-card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:30px;">
+        <div>
+          <div style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;">Welcome back</div>
+          <h3 id="dashUsername" style="margin:4px 0 0;">—</h3>
+          <p class="sub" id="dashRole" style="margin:4px 0 0;">—</p>
+          <div id="dashReferralCode" style="margin-top:8px;display:none;">
+            <span style="font-size:.75rem;color:var(--ink-soft);">Your referral code: </span>
+            <span id="dashRefCode" style="font-weight:700;color:var(--navy);font-size:.9rem;background:var(--gold-soft);padding:3px 10px;border-radius:6px;"></span>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;">Coin Balance</div>
+          <div id="dashCoins" style="font-family:'Cormorant Garamond',serif;font-size:2.3rem;color:var(--gold);font-weight:600;">0 coins</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button type="button" class="btn btn-outline btn-sm" id="switchRoleBtn">Switch to <span id="switchRoleLabel">Captain</span> mode</button>
+          <button type="button" class="btn btn-outline btn-sm" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+
+      <!-- TRAVELLER VIEW -->
+      <div id="travellerView" style="display:none;">
+
+        <div id="assignedCaptainBox" class="auth-card" style="display:none;margin-bottom:30px;">
+          <span style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold);">Your Tour Captain</span>
+          <h3 id="assignedCaptainName" style="margin:8px 0 4px;">—</h3>
+          <p class="sub" id="assignedCaptainBio">—</p>
+          <div style="background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0;">
+            <div style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:6px;">Latest trip update from your captain</div>
+            <p id="assignedCaptainUpdate" style="font-size:.9rem;color:var(--navy);">No updates posted yet.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="changeCaptainBtn">Change Captain</button>
+        </div>
+
+        <div id="captainDirectoryBox">
+          <h3 style="font-size:1.5rem;margin-bottom:6px;">Available Tour Captains</h3>
+          <p class="sub" style="margin-bottom:20px;color:var(--ink-soft);">Click on any captain to view their full profile and send a hire request.</p>
+          <div class="destination-grid" id="captainGrid"></div>
+        </div>
+
+      </div>
+
+      <!-- CAPTAIN VIEW -->
+      <div id="captainView" style="display:none;">
+
+        <div class="auth-card" style="margin-bottom:22px;background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--cream);border:none;">
+          <div style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--gold-soft);margin-bottom:6px;">Your Public Captain Profile</div>
+          <p style="color:rgba(255,255,255,.7);font-size:.88rem;margin-bottom:14px;">This is what travellers see. Share your profile link so they can hire you directly.</p>
+          <button type="button" class="btn btn-gold btn-sm" id="viewMyProfileBtn">View My Public Profile →</button>
+        </div>
+
+        <div class="auth-card" style="margin-bottom:30px;">
+          <h3 style="margin-bottom:6px;">Your Captain Profile</h3>
+          <p class="sub" style="margin-bottom:16px;">Keep this updated — travellers read your bio before sending a hire request.</p>
+          <div class="auth-grid">
+            <div class="full"><label for="captainBio">About You</label><textarea id="captainBio" placeholder="e.g. Local guide based in Manali, 5 years experience with treks, stays and transport bookings."></textarea></div>
+            <div class="full"><label for="captainUpdate">Trip Update for Current Customers</label><textarea id="captainUpdate" placeholder="e.g. Hotel check-in confirmed for Day 1, pickup at 9 AM tomorrow."></textarea></div>
+          </div>
+          <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Profile &amp; Post Update</button>
+          <p class="form-msg" id="profileMsg" style="color:var(--navy);">✓ Profile and update saved.</p>
+        </div>
+
+        <div class="auth-card" style="margin-bottom:30px;">
+          <h3 style="margin-bottom:6px;">Incoming Hire Requests</h3>
+          <p class="sub" style="margin-bottom:16px;">Accept to begin the booking — the traveller becomes your active customer.</p>
+          <div id="hireRequestsList"></div>
+        </div>
+
+        <div class="auth-card">
+          <h3 style="margin-bottom:6px;">My Active Customers</h3>
+          <p class="sub" style="margin-bottom:16px;">Travellers currently assigned to you.</p>
+          <div id="myCustomersList"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="name">travel<span>o</span>gram</span></div>
+        <p style="font-size:.88rem;max-width:280px;">Your destination, itinerary, and tour captain — all in one place.</p>
+      </div>
+      <div><h4>Explore</h4><ul><li><a href="#how">How it works</a></li><li><a href="#itineraries">Itineraries</a></li><li><a href="#captains">Tour Captains</a></li><li><a href="#rewards">Coins &amp; Rewards</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href="#auth">Sign Up</a></li><li><a href="#auth">Log In</a></li><li><a href="#plan">Plan a Trip</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>support@travelogram.com</li><li>+91 9924527637</li><li>Ahmedabad, Gujarat, India</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Travelogram. All rights reserved.</span>
+      <span>Your Destiny is Our Dignity</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919924527637?text=Hi%20Travelogram!%20I'd%20like%20to%20chat%20about%20planning%20a%20trip." class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.149-.149.347-.347.522-.521.174-.174.232-.297.34-.495.105-.198.05-.371-.05-.521-.099-.149-.643-1.55-.85-2.077-.198-.512-.404-.443-.602-.443-.198 0-.448 0-.65 0-.198 0-.522.075-.794.372-.273.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.066 3.13 5.014 4.395 2.95 1.264 2.95.842 3.482.793.532-.05 1.758-.718 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.273-.198-.57-.347zM12.04 21.785h-.005a9.708 9.708 0 01-4.95-1.354l-.355-.21-3.68.965.982-3.587-.231-.367a9.71 9.71 0 01-1.487-5.176c.002-5.367 4.37-9.733 9.738-9.733 2.6 0 5.045 1.014 6.881 2.852a9.673 9.673 0 012.85 6.886c-.002 5.367-4.37 9.724-9.743 9.724zM20.512 3.488A11.835 11.835 0 0012.05 0C5.495 0 .163 5.331.16 11.886c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 005.74 1.464h.005c6.554 0 11.887-5.332 11.89-11.887a11.82 11.82 0 00-3.428-8.435z"/></svg>
+  <span>Chat with us on WhatsApp</span>
+</a>
+
+<script>
+// ========== TRIP TYPE DATA ==========
+const TRIP_TYPE_DATA = {
+  solo: {
+    title:'Solo Trip', emoji:'🎒',
+    sub:'Independent travel tailored just for you — your pace, your rules.',
+    suggestions:[
+      {icon:'🏔️',title:'Spiti Valley',desc:'Remote, raw, and perfect for a solo journey. Monasteries, starlit skies, and zero crowd.'},
+      {icon:'🌊',title:'Pondicherry',desc:'French quarters, beach cafés, and quiet beaches. Solo bliss by the Bay of Bengal.'},
+      {icon:'🌿',title:'Coorg, Karnataka',desc:'Coffee plantations and misty hills — peaceful walks, local homestays.'}
+    ],
+    style:'Solo Trip'
+  },
+  trekker: {
+    title:'Trekker Trip', emoji:'⛰️',
+    sub:'Trail-tested routes, altitude-ready plans, and captains who know the mountains.',
+    suggestions:[
+      {icon:'❄️',title:'Kedarkantha Trek',desc:'Winter snow trek in Uttarakhand — clear ridges and summit views up to 12,500 ft.'},
+      {icon:'🦅',title:'Hampta Pass',desc:'Cross the Kullu valley into Lahaul — dramatic landscapes and high-altitude camping.'},
+      {icon:'🌄',title:'Roopkund Trek',desc:'The mystery lake trek — 5,029m, glaciers, and one of India\'s most iconic trails.'}
+    ],
+    style:'Trekker / Adventure'
+  },
+  bachelor: {
+    title:'Bachelor Trip', emoji:'🎉',
+    sub:'The last great ride — party, adventure and memories worth framing.',
+    suggestions:[
+      {icon:'🎶',title:'Goa — The Full Package',desc:'Casinos, beach parties, water sports, and the best nightlife in India.'},
+      {icon:'🏞️',title:'Manali with the Boys',desc:'Bikes on Rohtang, bonfires, and adventure sports. Iconic group trip.'},
+      {icon:'🏄',title:'Andaman Islands',desc:'Scuba diving, clear water, island hopping — celebrate before the big day.'}
+    ],
+    style:'Bachelor Trip'
+  },
+  student: {
+    title:'Student Trip', emoji:'🎓',
+    sub:'Maximum fun, minimum spend — budget-smart routes built for groups.',
+    suggestions:[
+      {icon:'🏕️',title:'Rishikesh on a Budget',desc:'Camping on the banks of the Ganges — rafting, bungee, and ₹200 thalis.'},
+      {icon:'🌄',title:'Kasol & Kheerganga',desc:'Backpacker\'s paradise in Himachal — cheap stays, trail walks, and chill vibes.'},
+      {icon:'🏰',title:'Rajasthan Triangle',desc:'Jaipur, Jodhpur, Jaisalmer — heritage, food and camel safaris under ₹8,000 each.'}
+    ],
+    style:'Student Trip / Budget'
+  },
+  family: {
+    title:'Family Trip', emoji:'👨‍👩‍👧‍👦',
+    sub:'Safe, comfortable itineraries that work for every age — from toddlers to grandparents.',
+    suggestions:[
+      {icon:'🦁',title:'Jim Corbett',desc:'India\'s oldest national park — jeep safaris, resort stays and wildlife for the whole family.'},
+      {icon:'🚢',title:'Kerala Houseboat',desc:'Drift through backwaters on a private houseboat — calm, scenic and utterly relaxing.'},
+      {icon:'🌺',title:'Ooty & Kodaikanal',desc:'Cool hill stations with toy trains, boating and family-friendly resorts.'}
+    ],
+    style:'Family Friendly'
+  },
+  honeymoon: {
+    title:'Honeymoon', emoji:'💑',
+    sub:'Private, romantic and curated just for two — your perfect first trip together.',
+    suggestions:[
+      {icon:'🌴',title:'Andaman & Nicobar',desc:'Crystal waters, private beach resorts and snorkeling for two. Pure paradise.'},
+      {icon:'🏔️',title:'Shimla & Manali',desc:'Snow, cozy log fires and mountain drives — classic romantic North India.'},
+      {icon:'🌊',title:'Maldives from India',desc:'Quick hop from Chennai or Mumbai — overwater bungalows and ocean sunsets.'}
+    ],
+    style:'Honeymoon'
+  },
+  weekend: {
+    title:'Weekend Escape', emoji:'⚡',
+    sub:'Pack Friday evening, return Sunday night — the perfect 2–3 day recharge.',
+    suggestions:[
+      {icon:'🌲',title:'Mahabaleshwar from Mumbai',desc:'2 hrs by car — strawberry farms, viewpoints and cool hill air.'},
+      {icon:'🏰',title:'Mysore from Bengaluru',desc:'3 hrs away — palaces, silk, and idli breakfast at 7 AM.'},
+      {icon:'⛵',title:'Gokarna from Goa',desc:'Quiet beaches, cliffside walks and hammock sunsets — just 3 hours away.'}
+    ],
+    style:'Weekend Escape'
+  },
+  luxury: {
+    title:'Luxury Tour', emoji:'✨',
+    sub:'Premium resorts, private transfers, exclusive experiences — no compromises.',
+    suggestions:[
+      {icon:'🏯',title:'Palace Tour — Rajasthan',desc:'Stay in heritage palaces, private jeep safaris, fine-dining and butler service.'},
+      {icon:'🌿',title:'Luxury Kerala',desc:'Ayurvedic resorts, private houseboat, Munnar tea estate suites.'},
+      {icon:'✈️',title:'Maldives or Dubai',desc:'Quick international luxury escape — curated top resorts with private island options.'}
+    ],
+    style:'Luxury'
+  }
+};
+
+// ========== TRIP TYPE CHIPS ==========
+document.getElementById('tripTypeGrid').addEventListener('click', function(e){
+  const chip = e.target.closest('.trip-type-chip');
+  if(!chip) return;
+  const type = chip.dataset.type;
+  const data = TRIP_TYPE_DATA[type];
+  if(!data) return;
+
+  document.querySelectorAll('.trip-type-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+
+  const panel = document.getElementById('tripTypeResult');
+  const content = document.getElementById('ttrContent');
+  panel.style.display = 'block';
+
+  // Solo & Trekker trips skip the captain directory — "Hire a Captain" jumps
+  // straight to the itinerary fill-up form, pre-checks the captain-match box,
+  // and submitting sends everything to WhatsApp so we can allot them a captain.
+  const directHireTypes = ['solo','trekker'];
+  const findCaptainBtnHTML = directHireTypes.includes(type)
+    ? `<button type="button" class="btn btn-outline" id="hireCaptainBtn">Hire a Captain</button>`
+    : `<a href="#captains-section" class="btn btn-outline">Find a Captain</a>`;
+
+  content.innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+      <span style="font-size:2.2rem;">${data.emoji}</span>
+      <div>
+        <h3 style="margin-bottom:4px;">${data.title}</h3>
+        <p class="sub" style="margin:0;color:var(--ink-soft);">${data.sub}</p>
+      </div>
+    </div>
+    <div class="trip-suggestions">
+      ${data.suggestions.map(s=>`
+        <div class="trip-sugg-card">
+          <div class="ts-icon">${s.icon}</div>
+          <h4>${s.title}</h4>
+          <p>${s.desc}</p>
+        </div>`).join('')}
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+      <a href="#plan" class="btn btn-primary" id="planThisTypeBtn">Plan a ${data.title} →</a>
+      ${findCaptainBtnHTML}
+    </div>`;
+
+  // Pre-fill travel style in form
+  document.getElementById('style').value = data.style;
+
+  // Wire up the direct "Hire a Captain" flow for Solo / Trekker trips
+  const hireCaptainBtn = document.getElementById('hireCaptainBtn');
+  if(hireCaptainBtn){
+    hireCaptainBtn.addEventListener('click', function(){
+      document.getElementById('needCaptain').checked = true;
+      document.getElementById('plan').scrollIntoView({behavior:'smooth'});
+    });
+  }
+
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+
+// ========== MOBILE MENU ==========
+document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+document.getElementById('navLinks').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+// ========== DESTINATION FILTER ==========
+const destSearch=document.getElementById('destSearch');
+const destType=document.getElementById('destType');
+const destBudget=document.getElementById('destBudget');
+const destCards=Array.from(document.getElementById('destinationGrid').querySelectorAll('.dest-card'));
+function filterDest(){
+  const q=destSearch.value.trim().toLowerCase();
+  const t=destType.value;
+  const b=destBudget.value;
+  let n=0;
+  destCards.forEach(c=>{
+    const ok=(!q||c.dataset.name.includes(q))&&(t==='all'||c.dataset.type===t)&&(b==='all'||c.dataset.budget===b);
+    c.style.display=ok?'':'none';
+    if(ok)n++;
+  });
+  document.getElementById('noResults').style.display=n===0?'block':'none';
+}
+destSearch.addEventListener('input',filterDest);
+destType.addEventListener('change',filterDest);
+destBudget.addEventListener('change',filterDest);
+document.getElementById('destClear').addEventListener('click',()=>{destSearch.value='';destType.value='all';destBudget.value='all';filterDest();});
+
+// ========== DESTINATION EXPLORER DATA (Pinterest-style places to visit) ==========
+const DEST_PLACES = {
+  manali:{
+    name:'Manali',
+    places:[
+      {icon:'🏔️',name:'Solang Valley',desc:'Paragliding, zorbing & snow activities surrounded by peaks.',likes:'412 travellers loved this'},
+      {icon:'🛕',name:'Hadimba Temple',desc:'Ancient wooden temple in a cedar forest, peaceful and historic.',likes:'298 travellers loved this'},
+      {icon:'🌉',name:'Old Manali',desc:'Cafés, riverside walks and boho shops along the Manalsu stream.',likes:'356 travellers loved this'},
+      {icon:'🚇',name:'Atal Tunnel & Sissu',desc:'Drive through the world\'s longest high-altitude tunnel into Lahaul.',likes:'201 travellers loved this'},
+      {icon:'⛷️',name:'Rohtang Pass',desc:'Snow-covered pass with epic views (seasonal access).',likes:'274 travellers loved this'},
+      {icon:'♨️',name:'Vashisht Hot Springs',desc:'Natural hot water springs and temple, great after a trek.',likes:'150 travellers loved this'}
+    ]
+  },
+  goa:{
+    name:'Goa',
+    places:[
+      {icon:'🏖️',name:'Baga Beach',desc:'Lively shacks, water sports and sunset parties.',likes:'520 travellers loved this'},
+      {icon:'⛪',name:'Basilica of Bom Jesus',desc:'UNESCO heritage church in Old Goa with stunning architecture.',likes:'187 travellers loved this'},
+      {icon:'🛶',name:'Chapora Fort',desc:'Iconic clifftop fort with panoramic sea views — famous from films.',likes:'243 travellers loved this'},
+      {icon:'🌅',name:'Anjuna Flea Market',desc:'Wednesday market — handicrafts, music and beach vibes.',likes:'165 travellers loved this'},
+      {icon:'🛥️',name:'Dudhsagar Falls',desc:'Spectacular waterfall trip through the jungle on a jeep safari.',likes:'310 travellers loved this'},
+      {icon:'🍹',name:'Palolem Beach',desc:'Calmer, palm-lined beach in South Goa — perfect for relaxing.',likes:'289 travellers loved this'}
+    ]
+  },
+  jaipur:{
+    name:'Jaipur',
+    places:[
+      {icon:'🏰',name:'Amber Fort',desc:'Majestic hilltop fort with mirrored halls and elephant rides.',likes:'445 travellers loved this'},
+      {icon:'🌸',name:'Hawa Mahal',desc:'The iconic "Palace of Winds" — best at sunrise for photos.',likes:'398 travellers loved this'},
+      {icon:'👑',name:'City Palace',desc:'Royal residence with museums, courtyards and Rajput architecture.',likes:'276 travellers loved this'},
+      {icon:'🔭',name:'Jantar Mantar',desc:'Giant astronomical instruments — a UNESCO World Heritage site.',likes:'140 travellers loved this'},
+      {icon:'🛍️',name:'Johari Bazaar',desc:'Famous for jewellery, textiles and traditional Rajasthani handicrafts.',likes:'205 travellers loved this'},
+      {icon:'🐆',name:'Nahargarh Fort',desc:'Sunset point overlooking the entire Pink City.',likes:'231 travellers loved this'}
+    ]
+  },
+  rishikesh:{
+    name:'Rishikesh',
+    places:[
+      {icon:'🌊',name:'River Rafting at Shivpuri',desc:'Grade I–IV rapids on the Ganges — beginner to thrill-seeker friendly.',likes:'367 travellers loved this'},
+      {icon:'🌉',name:'Laxman Jhula',desc:'Iconic suspension bridge with temples and riverside cafés.',likes:'298 travellers loved this'},
+      {icon:'🧘',name:'Parmarth Niketan Ganga Aarti',desc:'Evening prayer ceremony on the riverbank — a must-see ritual.',likes:'412 travellers loved this'},
+      {icon:'🪂',name:'Cliff Jumping & Bungee',desc:'India\'s highest bungee jump near Mohanchatti.',likes:'189 travellers loved this'},
+      {icon:'🏕️',name:'Riverside Camping',desc:'Beach camps along the Ganges with bonfires under the stars.',likes:'250 travellers loved this'},
+      {icon:'🛕',name:'Neelkanth Mahadev Temple',desc:'Forest trek to a serene Shiva temple in the hills.',likes:'130 travellers loved this'}
+    ]
+  },
+  mumbai:{
+    name:'Mumbai',
+    places:[
+      {icon:'🌉',name:'Gateway of India & Marine Drive',desc:'Iconic monument and the famous "Queen\'s Necklace" promenade.',likes:'480 travellers loved this'},
+      {icon:'🏝️',name:'Elephanta Caves',desc:'Ancient rock-cut caves on an island, short ferry ride away.',likes:'176 travellers loved this'},
+      {icon:'🍔',name:'Mohammed Ali Road Food Trail',desc:'Legendary street food, especially during evenings.',likes:'330 travellers loved this'},
+      {icon:'🎬',name:'Bandra & Bollywood Tour',desc:'Sea-link views, cafés and celebrity hotspots.',likes:'215 travellers loved this'},
+      {icon:'🛍️',name:'Colaba Causeway',desc:'Shopping street for souvenirs, fashion and antiques.',likes:'190 travellers loved this'},
+      {icon:'🌇',name:'Worli Sea Face',desc:'Sunset views from the iconic sea-link bridge.',likes:'160 travellers loved this'}
+    ]
+  },
+  kerala:{
+    name:'Kerala',
+    places:[
+      {icon:'🛶',name:'Alleppey Houseboat',desc:'Overnight stay drifting through the famous backwaters.',likes:'502 travellers loved this'},
+      {icon:'🍃',name:'Munnar Tea Gardens',desc:'Rolling green tea estates and misty viewpoints.',likes:'389 travellers loved this'},
+      {icon:'🐘',name:'Periyar Wildlife Sanctuary',desc:'Boat safaris to spot elephants and wildlife near Thekkady.',likes:'245 travellers loved this'},
+      {icon:'🏖️',name:'Varkala Cliff Beach',desc:'Dramatic red cliffs meeting golden sand beaches.',likes:'298 travellers loved this'},
+      {icon:'💆',name:'Ayurvedic Spa Retreat',desc:'Traditional Kerala wellness treatments and massages.',likes:'170 travellers loved this'},
+      {icon:'🛕',name:'Padmanabhaswamy Temple',desc:'Historic temple in Thiruvananthapuram with stunning architecture.',likes:'120 travellers loved this'}
+    ]
+  },
+  ladakh:{
+    name:'Leh-Ladakh',
+    places:[
+      {icon:'💎',name:'Pangong Tso Lake',desc:'Surreal blue high-altitude lake — featured in many films.',likes:'430 travellers loved this'},
+      {icon:'🏔️',name:'Khardung La Pass',desc:'One of the world\'s highest motorable roads — bucket-list ride.',likes:'310 travellers loved this'},
+      {icon:'🛕',name:'Thiksey Monastery',desc:'Stunning hilltop monastery resembling the Potala Palace.',likes:'205 travellers loved this'},
+      {icon:'🏜️',name:'Nubra Valley',desc:'Sand dunes, double-humped camels and apricot orchards.',likes:'267 travellers loved this'},
+      {icon:'🌊',name:'Magnetic Hill & Sangam',desc:'Optical illusion hill and confluence of Indus & Zanskar rivers.',likes:'180 travellers loved this'},
+      {icon:'🌌',name:'Stargazing at Hanle',desc:'One of the darkest skies in India — astronomy village.',likes:'140 travellers loved this'}
+    ]
+  },
+  udaipur:{
+    name:'Udaipur',
+    places:[
+      {icon:'🏯',name:'City Palace',desc:'Grand palace complex overlooking Lake Pichola.',likes:'410 travellers loved this'},
+      {icon:'🚤',name:'Lake Pichola Boat Ride',desc:'Sunset boat ride past the Lake Palace and ghats.',likes:'355 travellers loved this'},
+      {icon:'🌳',name:'Saheliyon Ki Bari',desc:'Beautiful garden with fountains, built for royal attendants.',likes:'140 travellers loved this'},
+      {icon:'🛕',name:'Jagdish Temple',desc:'Intricately carved Indo-Aryan temple near the City Palace.',likes:'120 travellers loved this'},
+      {icon:'🌄',name:'Monsoon Palace',desc:'Hilltop palace with panoramic sunset views over the city.',likes:'230 travellers loved this'},
+      {icon:'🎨',name:'Bagore Ki Haveli',desc:'Cultural haveli with folk dance shows in the evening.',likes:'165 travellers loved this'}
+    ]
+  }
+};
+
+// Pinned places state: { destKey: { name, note, places:Set(placeNames) } }
+let pinnedTrip = { destKey:null, destName:'', note:'', places:[] };
+
+function openDestExplorer(destKey){
+  const data = DEST_PLACES[destKey];
+  if(!data) return;
+  document.getElementById('exTitle').textContent = `Explore ${data.name}`;
+  document.getElementById('exSubtitle').textContent = `Places loved by other travellers in ${data.name}. Pin your favourites to add them to your itinerary request.`;
+
+  // If switching destinations, reset pins (keep note if same destination)
+  if(pinnedTrip.destKey !== destKey){
+    pinnedTrip = { destKey: destKey, destName: data.name, note:'', places:[] };
+  }
+  document.getElementById('exItineraryNote').value = pinnedTrip.note || '';
+
+  const grid = document.getElementById('exGrid');
+  grid.innerHTML = '';
+  data.places.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'place-pin-card';
+    const isPinned = pinnedTrip.places.includes(p.name);
+    card.innerHTML = `
+      <div class="pimg">${p.icon}</div>
+      <div class="pbody">
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <p style="font-size:.74rem;color:var(--gold);font-weight:600;">❤️ ${p.likes}</p>
+        <button type="button" class="pin-btn ${isPinned?'pinned':''}" data-place="${p.name}">
+          <span class="pin-icon">📌</span> ${isPinned?'Pinned to Itinerary':'Pin to Itinerary'}
+        </button>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  grid.querySelectorAll('.pin-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const placeName = btn.dataset.place;
+      const idx = pinnedTrip.places.indexOf(placeName);
+      if(idx===-1){
+        pinnedTrip.places.push(placeName);
+        btn.classList.add('pinned');
+        btn.innerHTML = '<span class="pin-icon">📌</span> Pinned to Itinerary';
+      } else {
+        pinnedTrip.places.splice(idx,1);
+        btn.classList.remove('pinned');
+        btn.innerHTML = '<span class="pin-icon">📌</span> Pin to Itinerary';
+      }
+      renderExplorerPinnedTags();
+    });
+  });
+
+  renderExplorerPinnedTags();
+  document.getElementById('destExplorer').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function renderExplorerPinnedTags(){
+  const wrap = document.getElementById('exPinnedTags');
+  wrap.innerHTML='';
+  if(pinnedTrip.places.length===0){
+    wrap.innerHTML = '<span class="pinned-empty">Nothing pinned yet — tap 📌 on a place above.</span>';
+    return;
+  }
+  pinnedTrip.places.forEach(name=>{
+    const tag=document.createElement('span');
+    tag.className='pinned-tag';
+    tag.innerHTML = `📌 ${name} <button type="button" data-name="${name}" aria-label="Remove">✕</button>`;
+    wrap.appendChild(tag);
+  });
+  wrap.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const name=b.dataset.name;
+      pinnedTrip.places = pinnedTrip.places.filter(n=>n!==name);
+      // also unmark the card if open
+      const card = document.querySelector(`.pin-btn[data-place="${name}"]`);
+      if(card){card.classList.remove('pinned');card.innerHTML='<span class="pin-icon">📌</span> Pin to Itinerary';}
+      renderExplorerPinnedTags();
+    });
+  });
+}
+
+function closeDestExplorer(){
+  pinnedTrip.note = document.getElementById('exItineraryNote').value.trim();
+  document.getElementById('destExplorer').style.display='none';
+  document.body.style.overflow='';
+  renderPlanPinnedSummary();
+}
+
+document.getElementById('exClose').addEventListener('click', closeDestExplorer);
+document.getElementById('destExplorer').addEventListener('click', e=>{ if(e.target.id==='destExplorer') closeDestExplorer(); });
+
+document.getElementById('exGoToPlan').addEventListener('click', ()=>{
+  pinnedTrip.note = document.getElementById('exItineraryNote').value.trim();
+  // Pre-fill destination + style hints into the itinerary form
+  if(pinnedTrip.destName){
+    const destInput = document.getElementById('dest');
+    if(!destInput.value.trim()) destInput.value = pinnedTrip.destName;
+  }
+  renderPlanPinnedSummary();
+  document.getElementById('destExplorer').style.display='none';
+  document.body.style.overflow='';
+  document.getElementById('plan').scrollIntoView({behavior:'smooth'});
+});
+
+// Wire up dest cards (image area + whole card, except the explore link keeps scrolling too)
+document.querySelectorAll('.dest-card').forEach(card=>{
+  card.addEventListener('click', (e)=>{
+    const key = card.dataset.key;
+    if(!key) return;
+    e.preventDefault();
+    openDestExplorer(key);
+  });
+});
+
+// ========== PLAN FORM: pinned summary rendering ==========
+function renderPlanPinnedSummary(){
+  const tagsWrap = document.getElementById('planPinnedTags');
+  const emptyMsg = document.getElementById('planPinnedEmpty');
+  const noteWrap = document.getElementById('planItineraryNoteWrap');
+  const noteDisplay = document.getElementById('planItineraryNoteDisplay');
+
+  tagsWrap.innerHTML='';
+  if(!pinnedTrip.places || pinnedTrip.places.length===0){
+    emptyMsg.style.display='block';
+  } else {
+    emptyMsg.style.display='none';
+    pinnedTrip.places.forEach(name=>{
+      const tag=document.createElement('span');
+      tag.className='pinned-tag';
+      tag.innerHTML = `📌 ${name} <button type="button" data-name="${name}" aria-label="Remove">✕</button>`;
+      tagsWrap.appendChild(tag);
+    });
+    tagsWrap.querySelectorAll('button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const name=b.dataset.name;
+        pinnedTrip.places = pinnedTrip.places.filter(n=>n!==name);
+        renderPlanPinnedSummary();
+      });
+    });
+  }
+
+  if(pinnedTrip.note && pinnedTrip.note.trim()){
+    noteWrap.style.display='block';
+    if(!noteDisplay.value.trim()) noteDisplay.value = pinnedTrip.note;
+  } else if(!noteDisplay.value.trim()){
+    noteWrap.style.display='none';
+  }
+}
+renderPlanPinnedSummary();
+
+// ========== ITINERARY FORM ==========
+document.getElementById('itineraryForm').addEventListener('submit',function(e){
+  e.preventDefault();
+
+  const pinnedPlacesText = pinnedTrip.places && pinnedTrip.places.length
+    ? pinnedTrip.places.join(', ')
+    : 'None selected';
+  const itineraryNote = document.getElementById('planItineraryNoteDisplay').value.trim()
+    || pinnedTrip.note || '';
+
+  const msg=`New Itinerary Request - Travelogram\n\nDestination: ${document.getElementById('dest').value}\nTravellers: ${document.getElementById('travellers').value}\nStart Date: ${document.getElementById('startDate').value}\nDuration: ${document.getElementById('days').value} day(s)\nBudget: ${document.getElementById('budget').value}\nTravel Style: ${document.getElementById('style').value}\nTour Captain Needed: ${document.getElementById('needCaptain').checked?'Yes':'No'}\n\n📌 Pinned Places to Visit: ${pinnedPlacesText}\n📝 Itinerary Guide Notes: ${itineraryNote || 'None'}\n\nCustomer WhatsApp: ${document.getElementById('whatsapp').value}\nCustomer Email: ${document.getElementById('planEmail').value}\n\nAdditional Info:\n${document.getElementById('extraInfo').value}`;
+
+  document.getElementById('planMsg').style.display='block';
+  this.querySelector('button[type="submit"]').textContent='Opening WhatsApp...';
+  window.open(`https://wa.me/919924527637?text=${encodeURIComponent(msg)}`,'_blank');
+});
+
+// ========== ACCOUNT SYSTEM ==========
+const USERS_KEY='tg_users';
+const SESSION_KEY='tg_current_user';
+function getUsers(){return JSON.parse(localStorage.getItem(USERS_KEY)||'{}');}
+function saveUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u));}
+function getCurrentUsername(){return localStorage.getItem(SESSION_KEY);}
+function setCurrentUsername(u){u?localStorage.setItem(SESSION_KEY,u):localStorage.removeItem(SESSION_KEY);}
+
+function seedCaptains(){
+  const users=getUsers();
+  const samples={
+    'rahul_captain':{username:'rahul_captain',email:'rahul@example.com',whatsapp:'+91 90000 00001',password:'demo',role:'captain',activeRole:'captain',coins:120,bio:'Local guide based in Manali — 5 years experience with treks, stays and transport bookings.',tripUpdate:'All Day 2 activities confirmed. Hotel check-in at 3 PM.',hireRequests:[],customers:[]},
+    'priya_captain':{username:'priya_captain',email:'priya@example.com',whatsapp:'+91 90000 00002',password:'demo',role:'captain',activeRole:'captain',coins:80,bio:'Goa-based captain specialising in beach holidays, water sports and nightlife itineraries.',tripUpdate:'',hireRequests:[],customers:[]}
+  };
+  let changed=false;
+  Object.keys(samples).forEach(k=>{if(!users[k]){users[k]=samples[k];changed=true;}});
+  if(changed)saveUsers(users);
+}
+seedCaptains();
+
+// ========== SIGNUP ==========
+let selectedRole='traveller';
+document.getElementById('signupRoleToggle').querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById('signupRoleToggle').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedRole=btn.dataset.role;
+  });
+});
+
+document.getElementById('signupForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const username=document.getElementById('suUsername').value.trim();
+  const email=document.getElementById('suEmail').value.trim();
+  const whatsapp=document.getElementById('suWhatsapp').value.trim();
+  const password=document.getElementById('suPassword').value;
+  const referral=document.getElementById('suReferral').value.trim();
+  if(!username||!email||!whatsapp||!password)return;
+  const users=getUsers();
+  if(users[username]){alert('That username is already taken. Please choose another.');return;}
+  users[username]={username,email,whatsapp,password,role:selectedRole,activeRole:selectedRole,coins:0,bio:'',tripUpdate:'',assignedCaptain:null,hireRequests:[],customers:[],referral};
+  if(referral&&users[referral])users[referral].coins=(users[referral].coins||0)+25;
+  saveUsers(users);
+  setCurrentUsername(username);
+  document.getElementById('signupMsg').style.display='block';
+  renderDashboard();
+  window.location.hash='#dashboard';
+});
+
+// ========== LOGIN ==========
+document.getElementById('loginForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const id=document.getElementById('liEmail').value.trim();
+  const pw=document.getElementById('liPassword').value;
+  const users=getUsers();
+  let match=users[id]&&users[id].password===pw?users[id]:null;
+  if(!match)match=Object.values(users).find(u=>u.email===id&&u.password===pw)||null;
+  if(!match){alert('No account found with those details. Please sign up first.');return;}
+  setCurrentUsername(match.username);
+  document.getElementById('loginMsg').style.display='block';
+  renderDashboard();
+  window.location.hash='#dashboard';
+});
+
+// ========== LOGOUT ==========
+document.getElementById('logoutBtn').addEventListener('click',()=>{setCurrentUsername(null);renderDashboard();});
+
+// ========== SWITCH ROLE ==========
+document.getElementById('switchRoleBtn').addEventListener('click',()=>{
+  const uname=getCurrentUsername();
+  if(!uname)return;
+  const users=getUsers();
+  const user=users[uname];
+  // Toggle active view role
+  user.activeRole=user.activeRole==='captain'?'traveller':'captain';
+  saveUsers(users);
+  renderDashboard();
+});
+
+// ========== PUBLIC CAPTAIN GRID (home section) ==========
+function renderPublicCaptainGrid(){
+  const users=getUsers();
+  const grid=document.getElementById('publicCaptainGrid');
+  grid.innerHTML='';
+  const captains=Object.values(users).filter(u=>u.role==='captain'||u.activeRole==='captain');
+  if(captains.length===0){grid.innerHTML='<p class="empty-note">No tour captains have joined yet — check back soon.</p>';return;}
+  captains.forEach(cap=>{
+    const card=document.createElement('div');
+    card.className='dest-card';
+    card.style.cursor='pointer';
+    card.innerHTML=`<div class="img" style="background:linear-gradient(135deg,#1a3a5c,#0d2035);"><span>⚓ ${cap.username}</span></div><div class="body"><div class="tagline">Tour Captain</div><h4>${cap.username}</h4><p>${cap.bio?cap.bio.slice(0,90)+(cap.bio.length>90?'…':''):'No bio yet.'}</p><span style="font-size:.83rem;font-weight:600;color:var(--gold);">View Profile &amp; Hire →</span></div>`;
+    card.addEventListener('click',()=>openCaptainProfile(cap.username));
+    grid.appendChild(card);
+  });
+}
+
+// ========== CAPTAIN PROFILE PAGE ==========
+let viewingCaptain=null;
+function openCaptainProfile(capUsername){
+  const users=getUsers();
+  const cap=users[capUsername];
+  if(!cap)return;
+  viewingCaptain=capUsername;
+
+  document.getElementById('cpName').textContent=cap.username;
+  document.getElementById('cpBio').textContent=cap.bio||'This captain hasn\'t added a bio yet.';
+  document.getElementById('cpCoins').textContent=cap.coins||0;
+  document.getElementById('cpCustomers').textContent=(cap.customers||[]).length;
+
+  if(cap.tripUpdate){
+    document.getElementById('cpUpdate').textContent=cap.tripUpdate;
+    document.getElementById('cpUpdateBox').style.display='block';
+  } else {
+    document.getElementById('cpUpdateBox').style.display='none';
+  }
+
+  document.getElementById('cpHireName').textContent=cap.username;
+
+  const currentUser=getCurrentUsername();
+  const currentUserData=currentUser?users[currentUser]:null;
+  const cpNotLoggedIn=document.getElementById('cpNotLoggedIn');
+  const cpHireForm=document.getElementById('cpHireForm');
+
+  if(!currentUser||!currentUserData||(currentUserData.activeRole==='captain'&&currentUserData.role==='captain')){
+    cpNotLoggedIn.style.display='block';
+    cpHireForm.style.display='none';
+  } else {
+    cpNotLoggedIn.style.display='none';
+    cpHireForm.style.display='block';
+    document.getElementById('cpHireMsg').style.display='none';
+    document.getElementById('cpHireDest').value='';
+    document.getElementById('cpHireDates').value='';
+    document.getElementById('cpHirePeople').value='';
+    document.getElementById('cpHireBudget').value='';
+    document.getElementById('cpHireNotes').value='';
+  }
+
+  document.getElementById('captainProfilePage').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+document.getElementById('backFromCaptainProfile').addEventListener('click',()=>{
+  document.getElementById('captainProfilePage').style.display='none';
+  document.body.style.overflow='';
+  viewingCaptain=null;
+});
+
+document.getElementById('cpHireSubmitBtn').addEventListener('click',()=>{
+  const currentUsername=getCurrentUsername();
+  if(!currentUsername||!viewingCaptain)return;
+  const users=getUsers();
+  const captain=users[viewingCaptain];
+  if(!captain)return;
+  captain.hireRequests=captain.hireRequests||[];
+  captain.hireRequests.push({
+    from:currentUsername,
+    destination:document.getElementById('cpHireDest').value.trim(),
+    dates:document.getElementById('cpHireDates').value.trim(),
+    people:document.getElementById('cpHirePeople').value.trim(),
+    budget:document.getElementById('cpHireBudget').value.trim(),
+    notes:document.getElementById('cpHireNotes').value.trim(),
+    status:'pending'
+  });
+  saveUsers(users);
+  document.getElementById('cpHireMsg').style.display='block';
+  document.getElementById('cpHireSubmitBtn').textContent='Request Sent ✓';
+  document.getElementById('cpHireSubmitBtn').disabled=true;
+});
+
+// ========== TRAVELLER VIEW IN DASHBOARD ==========
+function renderCaptainGridDashboard(currentUsername){
+  const users=getUsers();
+  const grid=document.getElementById('captainGrid');
+  grid.innerHTML='';
+  const captains=Object.values(users).filter(u=>u.role==='captain');
+  if(captains.length===0){grid.innerHTML='<p class="empty-note">No tour captains have joined yet.</p>';return;}
+  captains.forEach(cap=>{
+    const card=document.createElement('div');
+    card.className='dest-card';
+    card.style.cursor='pointer';
+    card.innerHTML=`<div class="img" style="background:linear-gradient(135deg,#1a3a5c,#0d2035);"><span>⚓ ${cap.username}</span></div><div class="body"><div class="tagline">Tour Captain</div><h4>${cap.username}</h4><p>${cap.bio?cap.bio.slice(0,80)+(cap.bio.length>80?'…':''):'No bio yet.'}</p><span style="font-size:.83rem;font-weight:600;color:var(--gold);">View &amp; Hire →</span></div>`;
+    card.addEventListener('click',()=>openCaptainProfile(cap.username));
+    grid.appendChild(card);
+  });
+}
+
+function renderTravellerView(username){
+  const users=getUsers();
+  const traveller=users[username];
+  const assignedBox=document.getElementById('assignedCaptainBox');
+  const directoryBox=document.getElementById('captainDirectoryBox');
+  if(traveller.assignedCaptain&&users[traveller.assignedCaptain]){
+    const captain=users[traveller.assignedCaptain];
+    document.getElementById('assignedCaptainName').textContent=captain.username;
+    document.getElementById('assignedCaptainBio').textContent=captain.bio||'No bio added yet.';
+    document.getElementById('assignedCaptainUpdate').textContent=captain.tripUpdate||'No updates posted yet.';
+    assignedBox.style.display='block';
+    directoryBox.style.display='none';
+  } else {
+    assignedBox.style.display='none';
+    directoryBox.style.display='block';
+    renderCaptainGridDashboard(username);
+  }
+}
+
+document.getElementById('changeCaptainBtn').addEventListener('click',()=>{
+  const uname=getCurrentUsername();
+  if(!uname)return;
+  const users=getUsers();
+  const traveller=users[uname];
+  // Remove from captain's customer list
+  if(traveller.assignedCaptain&&users[traveller.assignedCaptain]){
+    const prevCap=users[traveller.assignedCaptain];
+    prevCap.customers=(prevCap.customers||[]).filter(c=>c!==uname);
+  }
+  traveller.assignedCaptain=null;
+  saveUsers(users);
+  renderTravellerView(uname);
+});
+
+// ========== CAPTAIN VIEW IN DASHBOARD ==========
+function renderCaptainView(username){
+  const users=getUsers();
+  const captain=users[username];
+  document.getElementById('captainBio').value=captain.bio||'';
+  document.getElementById('captainUpdate').value=captain.tripUpdate||'';
+
+  // Incoming requests
+  const list=document.getElementById('hireRequestsList');
+  list.innerHTML='';
+  const pending=(captain.hireRequests||[]).filter(r=>r.status==='pending');
+  if(pending.length===0){list.innerHTML='<p class="empty-note">No new hire requests right now.</p>';}
+  else {
+    pending.forEach(req=>{
+      const realIdx=captain.hireRequests.indexOf(req);
+      const card=document.createElement('div');
+      card.className='request-card';
+      card.innerHTML=`<div class="meta"><b>${req.from}</b><div class="tagline">Destination: ${req.destination||'—'} · Dates: ${req.dates||'—'} · People: ${req.people||'—'} · Budget: ${req.budget||'—'}</div><p>${req.notes||'No additional notes.'}</p><span class="status-pill pending">Pending</span></div><div class="request-actions"><button type="button" class="btn btn-primary accept-btn" data-idx="${realIdx}">Accept</button><button type="button" class="btn btn-outline decline-btn" data-idx="${realIdx}">Decline</button></div>`;
+      list.appendChild(card);
+    });
+    list.querySelectorAll('.accept-btn').forEach(btn=>btn.addEventListener('click',()=>respondRequest(username,parseInt(btn.dataset.idx),'accepted')));
+    list.querySelectorAll('.decline-btn').forEach(btn=>btn.addEventListener('click',()=>respondRequest(username,parseInt(btn.dataset.idx),'declined')));
+  }
+
+  // Customers
+  const custList=document.getElementById('myCustomersList');
+  custList.innerHTML='';
+  const customers=captain.customers||[];
+  if(customers.length===0){custList.innerHTML='<p class="empty-note">No active customers yet.</p>';}
+  else {
+    customers.forEach(cu=>{
+      const cust=users[cu];
+      if(!cust)return;
+      const row=document.createElement('div');
+      row.className='request-card';
+      row.innerHTML=`<div class="meta"><b>${cust.username}</b><div class="tagline">WhatsApp: ${cust.whatsapp}</div><span class="status-pill accepted">Active customer</span></div>`;
+      custList.appendChild(row);
+    });
+  }
+}
+
+function respondRequest(captainUsername,idx,decision){
+  const users=getUsers();
+  const captain=users[captainUsername];
+  const req=captain.hireRequests[idx];
+  req.status=decision;
+  if(decision==='accepted'){
+    const traveller=users[req.from];
+    if(traveller){
+      if(traveller.assignedCaptain&&users[traveller.assignedCaptain]){
+        const prev=users[traveller.assignedCaptain];
+        prev.customers=(prev.customers||[]).filter(c=>c!==traveller.username);
+      }
+      traveller.assignedCaptain=captainUsername;
+      traveller.coins=(traveller.coins||0)+50;
+      captain.coins=(captain.coins||0)+50;
+      captain.customers=captain.customers||[];
+      if(!captain.customers.includes(traveller.username))captain.customers.push(traveller.username);
+    }
+  }
+  saveUsers(users);
+  renderDashboard();
+}
+
+document.getElementById('saveProfileBtn').addEventListener('click',()=>{
+  const uname=getCurrentUsername();
+  if(!uname)return;
+  const users=getUsers();
+  users[uname].bio=document.getElementById('captainBio').value.trim();
+  users[uname].tripUpdate=document.getElementById('captainUpdate').value.trim();
+  saveUsers(users);
+  document.getElementById('profileMsg').style.display='block';
+  renderPublicCaptainGrid();
+});
+
+document.getElementById('viewMyProfileBtn').addEventListener('click',()=>{
+  const uname=getCurrentUsername();
+  if(uname)openCaptainProfile(uname);
+});
+
+// ========== MAIN DASHBOARD RENDER ==========
+function renderDashboard(){
+  const username=getCurrentUsername();
+  const loggedOut=document.getElementById('dashLoggedOut');
+  const loggedIn=document.getElementById('dashLoggedIn');
+
+  if(!username){loggedOut.style.display='block';loggedIn.style.display='none';renderPublicCaptainGrid();return;}
+
+  const users=getUsers();
+  const user=users[username];
+  if(!user){setCurrentUsername(null);loggedOut.style.display='block';loggedIn.style.display='none';renderPublicCaptainGrid();return;}
+
+  loggedOut.style.display='none';
+  loggedIn.style.display='block';
+
+  document.getElementById('dashUsername').textContent=user.username;
+  document.getElementById('dashCoins').textContent=`${user.coins||0} coins`;
+
+  // Active role display
+  const activeRole=user.activeRole||user.role;
+  const isCapView=activeRole==='captain';
+  document.getElementById('dashRole').textContent=isCapView?'Tour Captain':'Traveller';
+  document.getElementById('switchRoleLabel').textContent=isCapView?'Traveller':'Captain';
+
+  // Referral code for captains
+  const refBox=document.getElementById('dashReferralCode');
+  if(isCapView){refBox.style.display='block';document.getElementById('dashRefCode').textContent=user.username;}
+  else{refBox.style.display='none';}
+
+  const tv=document.getElementById('travellerView');
+  const cv=document.getElementById('captainView');
+
+  if(isCapView){
+    tv.style.display='none';
+    cv.style.display='block';
+    renderCaptainView(username);
+  } else {
+    cv.style.display='none';
+    tv.style.display='block';
+    renderTravellerView(username);
+  }
+
+  renderPublicCaptainGrid();
+}
+
+renderDashboard();
+renderPublicCaptainGrid();
+</script>
+</body>
+</html>
